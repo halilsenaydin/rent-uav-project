@@ -8,6 +8,7 @@ This project is an application for renting unmanned aerial vehicles (UAVs). The 
 - [Installation](#installation)
 - [Running the Project](#running-the-project)
 - [Project Dependencies](#project-dependencies)
+- [App Images Dependencies](#app-images)
 
 ## Preview The Project
 
@@ -127,3 +128,32 @@ Access the Swagger-generated API documentation by visiting `http://localhost:800
 - [Django](https://www.djangoproject.com/)
 - [Angular](https://angular.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
+
+## App Images
+
+### Auth Images
+![Home](app-images/sign-in/1.%20Login.png)
+
+### Assembly User Images
+![Home](app-images/montaj_user/1.%20Home.png)
+![Produced Pieces](app-images/montaj_user/2.%20Produced-pieces.png)
+![Produced Pieces Permission 1](app-images/montaj_user/3.%20Produced-pieces%20Permission-1.png)
+![Produced IHA Stock](app-images/montaj_user/4.%20Produced-iha-stock.png)
+![Produce Piece](app-images/montaj_user/5.%20Produce-piece.png)
+![Produce IHA](app-images/montaj_user/6.%20Produce-iha.png)
+![Produce IHA Permission 1](app-images/montaj_user/7.%20Produce-iha%20Permission-1.png)
+![Produce IHA Success](app-images/montaj_user/8.%20Produce-iha%20success.png)
+![Produce IHA Stock](app-images/montaj_user/9.%20Produce-iha-stock.png)
+![Produce IHA Stock Permission 1](app-images/montaj_user/10.%20Produce-iha%20stock%20Permission-1.png)
+![Produce IHA Add New Piece](app-images/montaj_user/11.%20Produce%20iha%20add%20new%20ppiece.png)
+
+### Wind User Images
+![Home](app-images/kanat_user/1.%20Home.png)
+![Stocks](app-images/kanat_user/2.%20Stocks.png)
+![Permission 1](app-images/kanat_user/3.%20Permission-1.png)
+![Permission 2](app-images/kanat_user/4.%20Permission-2.png)
+![Produce Stock](app-images/kanat_user/5.%20Produce-stock.png)
+![Produce IHA Stock](app-images/kanat_user/6.%20Produce-iha-stock.png)
+![Produce Piece Success](app-images/kanat_user/7.%20Produce-piece-success.png)
+![Produce Piece Permission 1](app-images/kanat_user/8.%20Produce-piece%20Permission-1.png)
+![Produce IHA](app-images/kanat_user/9.%20Produce-iha.png)
