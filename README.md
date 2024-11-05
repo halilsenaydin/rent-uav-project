@@ -134,6 +134,9 @@ Access the Swagger-generated API documentation by visiting `http://localhost:800
 ### Auth Images
 ![Home](app-images/sign-in/1.%20Login.png)
 
+### 404 Not Found Images
+![Home](app-images/404-not-found.png)
+
 ### Assembly User Images
 ![Home](app-images/montaj_user/1.%20Home.png)
 ![Produced Pieces](app-images/montaj_user/2.%20Produced-pieces.png)
