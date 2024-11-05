@@ -1,0 +1,44 @@
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/img/logo.png" alt="Bootstrap" width="50" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul *ngIf="isAuthenticated" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/']" [ngClass]="{'active': currentUrl === '/'}"> Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/produced-pieces']"
+                        [ngClass]="{'active': currentUrl === '/produced-pieces'}"> Stokdaki Parçalar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/produced-airplanes']"
+                        [ngClass]="{'active': currentUrl === '/produced-airplanes'}">Stokdaki IHA'lar</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Üretim Yap
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" [routerLink]="['/produced-pieces/produce']">Parça Üret</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/produced-airplanes/produce']">IHA Üret</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item" *ngIf="!isAuthenticated">
+                    <a class="nav-link" [routerLink]="['/auth/login']">Giriş Yap</a>
+                </li>
+                <li class="nav-item" *ngIf="isAuthenticated">
+                    <a class="nav-link" href="#" (click)="logout()">Çıkış Yap</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

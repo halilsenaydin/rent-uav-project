@@ -1,0 +1,11 @@
+<div class="d-flex h-100 text-center text-white bg-dark rounded-5">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <main class="px-3">
+            <h1 class="pt-3 text-white">{{caption}}</h1>
+            <p class="lead">{{description}}</p>
+            <p class="lead py-3" *ngIf="link">
+                <a href={{link}} class="btn btn-lg btn-secondary fw-bold border-white bg-white">{{btnText}}</a>
+            </p>
+        </main>
+    </div>
+</div>

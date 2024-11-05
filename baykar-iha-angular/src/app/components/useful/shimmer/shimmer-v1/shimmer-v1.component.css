@@ -1,0 +1,88 @@
+.panel {
+    display: block;
+    border: solid #ccc 1px;
+    border-radius: 6px;
+    background: #ffffff;
+    margin: 24px;
+  }
+  
+  .Skeleton-root-circle {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    margin: 24px 6px 0 24px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-root-header {
+    display: inline-block;
+    margin: 0 0 8px 0;
+    height: 20px;
+    width: 150px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-root-image {
+    display: block;
+    height: 150px;
+    width: auto;
+    margin: 12px 0px 0px 0px;;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-root-body {
+    display: block;
+    height: 13px;
+    width: auto;
+    margin: 12px 24px 0px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-root-body-2 {
+    display: block;
+    height: 13px;
+    width: auto;
+    margin: 12px 24px 0px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-root-body-3 {
+    display: block;
+    height: 13px;
+    width: 200px;
+    margin: 12px 24px 24px 24px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  
+  .Skeleton-shimmer {
+    overflow: hidden;
+    position: relative;
+  }
+  .Skeleton-shimmer::after {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    animation: Skeleton-keyframes-shimmer 2.5s linear infinite;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
+  }
+  @-webkit-keyframes Skeleton-keyframes-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }

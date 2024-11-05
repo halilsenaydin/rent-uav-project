@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    <div class="jumbotron bg-light p-4">
+        <h1 class="display-4 text-center">Merhaba, <span class="text-primary">{{user?.username}}</span></h1>
+        <p class="lead text-center">Hoş geldin! Aşağıda kullanıcı bilgilerin yer almaktadır.</p>
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="text-muted">Kişisel Bilgiler</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <strong>İsim:</strong>
+                        <span class="badge bg-light text-dark">{{user?.firstName}}</span>
+                    </li>
+                    <li class="mb-2">
+                        <strong>Soyisim:</strong>
+                        <span class="badge bg-light text-dark">{{user?.lastName}}</span>
+                    </li>
+                    <li class="mb-2">
+                        <strong>Email:</strong>
+                        <span class="badge bg-light text-dark">{{user?.email}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5 class="text-muted">Hesap Bilgileri</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <strong>Kullanıcı Adı:</strong>
+                        <span class="badge bg-light text-dark">{{user?.username}}</span>
+                    </li>
+                    <li class="mb-2">
+                        <div class="d-flex flex-wrap">
+                            <span *ngFor="let team of user?.teams"
+                                class="badge bg-primary text-white me-1 mb-1">{{team.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

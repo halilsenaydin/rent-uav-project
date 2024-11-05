@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let piece of data">
+            <th scope="row">{{piece.id}}</th>
+            <td>{{piece.name}}</td>
+        </tr>
+    </tbody>
+</table>

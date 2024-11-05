@@ -1,0 +1,46 @@
+<div class="container-fluid" style="height: 50vh;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-8">
+            <div *ngIf="alert" class="alert alert-danger" role="alert">
+                {{alert}}
+            </div>
+            <h5>IHA Üret</h5>
+            <div class="card p-4" [ngClass]="{ 'disabled-card': alert }">
+                <form (ngSubmit)="addAirplane()">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="airplane" class="form-label">Model</label>
+                            <select [(ngModel)]="newAirplane.model" class="form-select" name="airplane" id="airplane"
+                                [disabled]="alert">
+                                <option *ngFor="let airplane of airplanes" [ngValue]="airplane.id">
+                                    {{ airplane.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="producedPiece" class="form-label">Piece Name</label>
+                            <select [(ngModel)]="newAirplane.parts" class="form-select" name="piece" id="producedPiece"
+                                [disabled]="alert" multiple>
+                                <option *ngFor="let producedPiece of producedPieces" [ngValue]="producedPiece.id">
+                                    {{ producedPiece.piece.name }} - {{ producedPiece.airplane.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="producedDate" class="form-label">Produced Date</label>
+                            <input type="date" [(ngModel)]="newAirplane.producedDate" class="form-control"
+                                [disabled]="alert" name="producedDate" id="producedDate" />
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col text-end">
+                            <button [disabled]="alert" type="submit" class="btn btn-success">
+                                <i class="bi bi-plus-circle"></i> Produce Airplane
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

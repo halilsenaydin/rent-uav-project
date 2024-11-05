@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <div class="container mt-4">
+                <h2 class="text-primary">Üretilen IHA'lar</h2>
+                <p class="text-muted">
+                    Montaj takımı tarafından üretilen IHA'lar.
+                </p>
+            </div>
+            <div *ngIf="alert" class="alert alert-danger" role="alert">
+                {{alert}}
+            </div>
+            <ng-container *ngIf="producedAirplanes.length!=0; else notAvailable">
+                <app-produced-airplanes-table [data]="producedAirplanes"></app-produced-airplanes-table>
+            </ng-container>
+            <ng-template #notAvailable>
+                <div *ngIf="!alert" class="alert alert-danger" role="alert">
+                    Henüz bir IHA üretilmemiş.
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

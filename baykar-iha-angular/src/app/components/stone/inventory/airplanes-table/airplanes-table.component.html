@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let airplane of data">
+            <th scope="row">{{airplane.id}}</th>
+            <td>{{airplane.name}}</td>
+        </tr>
+    </tbody>
+</table>

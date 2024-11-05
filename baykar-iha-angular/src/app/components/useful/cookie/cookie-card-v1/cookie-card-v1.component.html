@@ -1,0 +1,14 @@
+<div *ngIf="cookiesAccepted" class="cookies-card animation-scrool-b">
+    <div class="row">
+        <div class="col text-center">Sizlere daha iyi hizmet sunabilmek adına sitemizde <a href="/cookies-policy">çerez
+            </a>konumlandırmaktayız.
+            Kişisel verileriniz, KVKK ve GDPR kapsamında toplanıp işlenir. Detaylı bilgi almak için <a
+                href="/kvkk-policy">KVKK politikamızı</a> inceleyebilirsiniz.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-2 text-right">
+            <button (click)="acceptCookies()" class="btn btn-dark">Çerezleri Kabul Et</button>
+        </div>
+    </div>
+</div>

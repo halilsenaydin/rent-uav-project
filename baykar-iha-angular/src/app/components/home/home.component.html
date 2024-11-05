@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <app-user-card [user]="user"></app-user-card>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="col-lg-6">
+            <div class="container mt-4">
+                <h2 class="text-primary">Parçalar</h2>
+                <p class="text-muted">
+                    Takımlar tarafından üretilebilecek parçalar.
+                </p>
+            </div>
+            <app-pieces-table [data]="pieces">
+
+            </app-pieces-table>
+        </div>
+        <div class="col-lg-6">
+            <div class="container mt-4">
+                <h2 class="text-primary">IHA'lar</h2>
+                <p class="text-muted">
+                    Takımlar tarafından üretilebilecek IHA'lar.
+                </p>
+            </div>
+            <app-airplanes-table [data]="airplanes">
+            </app-airplanes-table>
+        </div>
+    </div>
+</div>

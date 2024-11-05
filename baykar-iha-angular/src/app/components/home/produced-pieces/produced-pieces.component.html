@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <div class="container mt-4">
+                <h2 class="text-primary">Üretilen Parçalar</h2>
+                <p class="text-muted">
+                    <span *ngIf="isAssemblyUser">Takımlar</span>
+                    <span *ngIf="!isAssemblyUser">Takımın</span>
+                    tarafından üretilen parçalar.
+                </p>
+            </div>
+
+            <div *ngIf="showAlert" class="alert alert-danger" role="alert">
+                Stok durumu sıfır olan IHA'lar: {{ zeroStockAirplanes.join(', ') }}
+            </div>
+
+            <ng-container *ngIf="producedPieces.length!=0; else notAvailable">
+                <app-produced-pieces-table [data]="producedPieces" [total]="total"
+                    [stock]="stock"></app-produced-pieces-table>
+            </ng-container>
+            <ng-template #notAvailable>
+                <div class="alert alert-danger" role="alert">
+                    <span *ngIf="isAssemblyUser">Takımlar</span>
+                    <span *ngIf="!isAssemblyUser">Takımın</span>
+                    tarafından üretilen bir parça bulunamadı.
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
