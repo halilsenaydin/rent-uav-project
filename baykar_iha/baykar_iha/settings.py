@@ -26,15 +26,17 @@ SECRET_KEY = "django-insecure-m%(v=rw+ak#(3mj5f_6=l_%nz=(26n$cf*whe#xxg@#$_rndv7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["94.154.34.5", "uav.kulabuz.com"]
+ALLOWED_HOSTS = ["94.154.34.5", "uav.kulabuz.com", "127.0.0.1", "uav-angular.kulabuz.com",]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://localhost:8001",
+    "https://uav-angular.kulabuz.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://uav.kulabuz.com',
+    "https://uav-angular.kulabuz.com",
 ]
 
 # Application definition
