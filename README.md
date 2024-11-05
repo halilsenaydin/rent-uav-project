@@ -3,7 +3,7 @@
 This project is an application for renting unmanned aerial vehicles (UAVs). The backend is developed using Django with a RESTful architecture, while the frontend is built using Angular in a modular structure.
 
 ## Table of Contents
-- [Preview The Project Used](#preview-the-project)
+- [Preview The Project](#preview-the-project)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Running the Project](#running-the-project)
