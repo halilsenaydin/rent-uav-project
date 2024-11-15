@@ -1,10 +1,27 @@
-from django.utils.decorators import method_decorator
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import AllowAny
-from drf_yasg.utils import swagger_auto_schema
+from core.decorators import (
+    assembly_team_permission_required,
+    group_required,
+    pieces_to_produce_by_team_permission_required,
+    piece_belong_to_airplane_permission_required,
+    produced_piece_status_must_have_to_true,
+    user_belong_to_team_with_request,
+)
+from core.permissions import CoreIsAuthenticated
+from core.results import SuccessResult, SuccessDataResult, ErrorResult
+from core.serializers import (
+    SuccessResultSerializer,
+    SuccessDataResultSerializer,
+    ErrorResultSerializer,
+)
+from core.utils import SerializerUtil
 from django.db import transaction
+from django.utils.decorators import method_decorator
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .constants import MessageConstant
+from .models import Airplane, Piece, ProducedAirplane, ProducedPiece
 from .serializers import (
     AirplaneSerializer,
     PieceSerializer,
@@ -13,31 +30,15 @@ from .serializers import (
     ProducedPieceSerializer,
     ProducedPieceDtoSerializer,
 )
-from .models import Airplane, Piece, ProducedAirplane, ProducedPiece
-from core.results import SuccessResult, ErrorResult, SuccessDataResult
-from core.serializers import (
-    SuccessResultSerializer,
-    ErrorResultSerializer,
-    SuccessDataResultSerializer,
-)
-from core.utils import SerializerUtil
-from core.decorators import (
-    pieces_to_produce_by_team_permission_required,
-    group_required,
-    piece_belong_to_airplane_permission_required,
-    assembly_team_permission_required,
-    produced_piece_status_must_have_to_true,
-    user_belong_to_team_with_request,
-)
-from core.permissions import CoreIsAuthenticated
-from .constants import MessageConstant
 
 
 class AirplanesView(APIView):
     permission_classes = [CoreIsAuthenticated]
 
     @method_decorator(transaction.atomic)
-    @swagger_auto_schema(request_body=AirplaneSerializer)
+    @swagger_auto_schema(
+        request_body=AirplaneSerializer, responses={201: SuccessResultSerializer()}
+    )
     def post(self, request):
         serializer = AirplaneSerializer(data=request.data)
         if serializer.is_valid():
@@ -51,6 +52,7 @@ class AirplanesView(APIView):
         result = ErrorResultSerializer(ErrorResult(errors)).data
         return Response(result)
 
+    @swagger_auto_schema(responses={200: AirplaneSerializer(many=True)})
     def get(self, request):
         airplanes = Airplane.objects.all()
         serializer = AirplaneSerializer(airplanes, many=True)
@@ -81,6 +83,7 @@ class AirplaneView(APIView):
         if isinstance(airplane, Response):
             return airplane
 
+    @swagger_auto_schema(responses={200: AirplaneSerializer()})
     def get(self, request, id):
         airplane = self.get_airplane(id)
         if self.handle_airplane_not_found(airplane):
@@ -92,7 +95,7 @@ class AirplaneView(APIView):
         ).data
         return Response(result)
 
-    @swagger_auto_schema(request_body=AirplaneSerializer)
+    @swagger_auto_schema(responses={200: SuccessResultSerializer()})
     def put(self, request, id):
         airplane = self.get_airplane(id)
         if self.handle_airplane_not_found(airplane):
@@ -110,6 +113,7 @@ class AirplaneView(APIView):
         result = ErrorResultSerializer(ErrorResult(errors)).data
         return Response(result)
 
+    @swagger_auto_schema(responses={204: SuccessResultSerializer()})
     def delete(self, request, id):
         airplane = self.get_airplane(id)
         if self.handle_airplane_not_found(airplane):
@@ -126,7 +130,9 @@ class PiecesView(APIView):
     permission_classes = [CoreIsAuthenticated]
 
     @method_decorator(transaction.atomic)
-    @swagger_auto_schema(request_body=PieceSerializer)
+    @swagger_auto_schema(
+        request_body=PieceSerializer, responses={201: SuccessResultSerializer()}
+    )
     def post(self, request):
         serializer = PieceSerializer(data=request.data)
         if serializer.is_valid():
@@ -141,6 +147,7 @@ class PiecesView(APIView):
         result = ErrorResultSerializer(ErrorResult(errors)).data
         return Response(result)
 
+    @swagger_auto_schema(responses={200: PieceSerializer(many=True)})
     def get(self, request):
         produced_pieces = Piece.objects.all()
         serializer = PieceSerializer(produced_pieces, many=True)
@@ -171,6 +178,7 @@ class PieceView(APIView):
         if isinstance(piece, Response):
             return piece
 
+    @swagger_auto_schema(responses={200: PieceSerializer()})
     def get(self, request, id):
         piece = self.get_piece(id)
         if self.handle_piece_not_found(piece):
@@ -182,7 +190,7 @@ class PieceView(APIView):
         ).data
         return Response(result)
 
-    @swagger_auto_schema(request_body=PieceSerializer)
+    @swagger_auto_schema(responses={200: SuccessResultSerializer()})
     def put(self, request, id):
         piece = self.get_piece(id)
         if self.handle_piece_not_found(piece):
@@ -200,6 +208,7 @@ class PieceView(APIView):
         result = ErrorResultSerializer(ErrorResult(errors)).data
         return Response(result)
 
+    @swagger_auto_schema(responses={204: SuccessResultSerializer()})
     def delete(self, request, id):
         piece = self.get_piece(id)
         if self.handle_piece_not_found(piece):
@@ -218,7 +227,10 @@ class ProducedAirplanesView(APIView):
     @method_decorator(assembly_team_permission_required)
     @method_decorator(piece_belong_to_airplane_permission_required)
     @method_decorator(transaction.atomic)
-    @swagger_auto_schema(request_body=ProducedAirplaneSerializer)
+    @swagger_auto_schema(
+        request_body=ProducedAirplaneSerializer,
+        responses={201: SuccessResultSerializer()},
+    )
     def post(self, request):
         serializer = ProducedAirplaneSerializer(data=request.data)
         if serializer.is_valid():
@@ -237,6 +249,7 @@ class ProducedAirplanesView(APIView):
         return Response(result)
 
     @method_decorator(assembly_team_permission_required)
+    @swagger_auto_schema(responses={200: ProducedAirplaneDtoSerializer(many=True)})
     def get(self, request):
         produced_airplanes = ProducedAirplane.objects.all()
         serializer = ProducedAirplaneDtoSerializer(produced_airplanes, many=True)
@@ -267,6 +280,7 @@ class ProducedAirplaneView(APIView):
         if isinstance(produced_airplane, Response):
             return produced_airplane
 
+    @swagger_auto_schema(responses={200: ProducedAirplaneDtoSerializer()})
     def get(self, request, id):
         produced_airplane = self.get_produced_airplane(id)
         if self.handle_produced_airplane_not_found(produced_airplane):
@@ -280,7 +294,7 @@ class ProducedAirplaneView(APIView):
 
     @method_decorator(assembly_team_permission_required)
     @method_decorator(piece_belong_to_airplane_permission_required)
-    @swagger_auto_schema(request_body=ProducedAirplaneSerializer)
+    @swagger_auto_schema(responses={200: SuccessResultSerializer()})
     def put(self, request, id):
         produced_airplane = self.get_produced_airplane(id)
         if self.handle_produced_airplane_not_found(produced_airplane):
@@ -299,6 +313,7 @@ class ProducedAirplaneView(APIView):
         return Response(result)
 
     @method_decorator(assembly_team_permission_required)
+    @swagger_auto_schema(responses={204: SuccessResultSerializer()})
     def delete(self, request, id):
         produced_airplane = self.get_produced_airplane(id)
         if self.handle_produced_airplane_not_found(produced_airplane):
@@ -318,7 +333,10 @@ class ProducedPiecesView(APIView):
     @method_decorator(user_belong_to_team_with_request)
     @method_decorator(pieces_to_produce_by_team_permission_required)
     @method_decorator(transaction.atomic)
-    @swagger_auto_schema(request_body=ProducedPieceSerializer)
+    @swagger_auto_schema(
+        request_body=ProducedPieceSerializer,
+        responses={201: SuccessResultSerializer()},
+    )
     def post(self, request):
         serializer = ProducedPieceSerializer(data=request.data)
         if serializer.is_valid():
@@ -333,6 +351,9 @@ class ProducedPiecesView(APIView):
         result = ErrorResultSerializer(ErrorResult(errors)).data
         return Response(result)
 
+    @swagger_auto_schema(
+        responses={200: ProducedPieceDtoSerializer(many=True)},
+    )
     def get(self, request):
         produced_pieces = ProducedPiece.objects.all()
         serializer = ProducedPieceDtoSerializer(produced_pieces, many=True)
@@ -353,6 +374,9 @@ class ProducedPiecesView(APIView):
 class ProducedPiecesByTeamView(APIView):
     permission_classes = [CoreIsAuthenticated]
 
+    @swagger_auto_schema(
+        responses={200: ProducedPieceDtoSerializer(many=True)},
+    )
     def get(self, request, team_id):
         produced_pieces = ProducedPiece.objects.filter(team_id=team_id)
         serializer = ProducedPieceDtoSerializer(produced_pieces, many=True)
@@ -410,6 +434,9 @@ class ProducedPieceView(APIView):
         if isinstance(produced_piece, Response):
             return produced_piece
 
+    @swagger_auto_schema(
+        responses={200: ProducedPieceDtoSerializer()},
+    )
     def get(self, request, id):
         produced_piece = self.get_produced_piece(id)
         if self.handle_produced_piece_not_found(produced_piece):
@@ -425,7 +452,9 @@ class ProducedPieceView(APIView):
     @method_decorator(group_required)
     @method_decorator(user_belong_to_team_with_request)
     @method_decorator(pieces_to_produce_by_team_permission_required)
-    @swagger_auto_schema(request_body=ProducedPieceSerializer)
+    @swagger_auto_schema(
+        responses={200: SuccessResultSerializer()},
+    )
     def put(self, request, id):
         produced_piece = self.get_produced_piece(id)
         if self.handle_produced_piece_not_found(produced_piece):
@@ -446,6 +475,9 @@ class ProducedPieceView(APIView):
     @method_decorator(produced_piece_status_must_have_to_true)
     @method_decorator(group_required)
     @method_decorator(pieces_to_produce_by_team_permission_required)
+    @swagger_auto_schema(
+        responses={200: SuccessResultSerializer()},
+    )
     def delete(self, request, id):
         produced_piece = self.get_produced_piece(id)
         if self.handle_produced_piece_not_found(produced_piece):
