@@ -1,0 +1,91 @@
+<div class="container-fluid mt-5 mb-5 d-flex flex-column">
+    <div class="row h-100 justify-content-center align-items-center flex-grow-1">
+        <div class="col-md-8">
+            <div *ngIf="alert" class="alert alert-danger" role="alert">
+                {{ alert }}
+            </div>
+            <h5>Soru Oluştur</h5>
+            <div class="card p-4 shadow" [ngClass]="{ 'disabled-card': alert }">
+                <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="text" class="form-label">Soru Metni</label>
+                            <input type="text" id="text" class="form-control" formControlName="text"
+                                placeholder="Soru metnini girin" required />
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="image" class="form-label">Soru Görseli</label>
+                            <input type="file" id="image" (change)="onQuestionImageSelected($event)"
+                                class="form-control" accept="image/*" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="type" class="form-label">Soru Tipi</label>
+                            <select id="type" class="form-select" formControlName="type" required>
+                                <option *ngFor="let option of questionTypes" [value]="option.value">
+                                    {{ option.label }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="level" class="form-label">Soru Seviyesi</label>
+                            <select id="level" class="form-select" formControlName="level" required>
+                                <option *ngFor="let option of questionLevels" [value]="option.value">
+                                    {{ option.label }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div formArrayName="options" class="mt-4">
+                        <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i"
+                            class="card p-3 mb-3 shadow-sm">
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <label for="optionText" class="form-label">Seçenek Metni</label>
+                                    <input id="optionText" class="form-control" formControlName="text"
+                                        placeholder="Seçeneği girin" required />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="optionImage" class="form-label">Seçenek Görseli</label>
+                                    <input type="file" id="optionImage" (change)="onOptionImageSelected($event, i)"
+                                        class="form-control" accept="image/*" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="isCorrect" formControlName="isCorrect"
+                                            class="form-check-input" />
+                                        <label for="isCorrect" class="form-check-label">Doğru Seçenek</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col text-end">
+                                    <button type="button" class="btn btn-danger" (click)="removeOption(i)">
+                                        <i class="bi bi-x-circle"></i> Sil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <button *ngIf="showAddOptionButton" type="button" class="btn btn-secondary"
+                                (click)="addOption()">
+                                <i class="bi bi-plus-circle"></i> Seçenek Ekle
+                            </button>
+                            <button type="submit" class="btn btn-success ms-2">
+                                <i class="bi bi-check-circle"></i> Kaydet
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
