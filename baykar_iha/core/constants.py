@@ -49,5 +49,4 @@ class MessageConstant:
 
 class ErrorConstant:
     UNAUTHORIZED_STATUS_CODE = 401
-    UNAUTHORIZED_CODE = "unauthorized"
-    UNAUTHORIZED_DETAIL = "Unauthorized access"
+    NOT_FOUND_STATUS_CODE = 404

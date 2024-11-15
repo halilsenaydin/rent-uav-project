@@ -26,7 +26,13 @@ SECRET_KEY = "django-insecure-m%(v=rw+ak#(3mj5f_6=l_%nz=(26n$cf*whe#xxg@#$_rndv7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["94.154.34.5", "uav.kulabuz.com", "127.0.0.1", "uav-angular.kulabuz.com",]
+ALLOWED_HOSTS = [
+    "94.154.34.5",
+    "uav.kulabuz.com",
+    "127.0.0.1",
+    "uav-angular.kulabuz.com",
+    "localhost",
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
@@ -35,7 +41,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://uav.kulabuz.com',
+    "https://uav.kulabuz.com",
     "https://uav-angular.kulabuz.com",
 ]
 
@@ -56,6 +62,7 @@ INSTALLED_APPS = [
     "core",
     "drf_yasg",
     "corsheaders",
+    "quizzes",
 ]
 
 REST_FRAMEWORK = {
@@ -82,9 +89,11 @@ SWAGGER_SETTINGS = {
             "description": "Bearer <your JWT token>",
         }
     },
-    "USE_SESSION_AUTH": False,
     "DEFAULT_AUTO_SCHEMA_CLASS": "drf_yasg.inspectors.SwaggerAutoSchema",
+    "USE_SESSION_AUTH": False,
+    "JSON_EDITOR": True,
 }
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -168,6 +177,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
