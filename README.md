@@ -3,12 +3,13 @@
 This project is an application for renting unmanned aerial vehicles (UAVs). The backend is developed using Django with a RESTful architecture, while the frontend is built using Angular in a modular structure.
 
 ## Table of Contents
+
 - [Preview The Project](#preview-the-project)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Running the Project](#running-the-project)
 - [Project Dependencies](#project-dependencies)
-- [App Images Dependencies](#app-images)
+- [App Images](#app-images)
 
 ## Preview The Project
 
@@ -21,23 +22,25 @@ This project is an application for renting unmanned aerial vehicles (UAVs). The 
 - For personnel login: [uav-angular.kulabuz.com/auth/login](http://uav-angular.kulabuz.com/auth/login)
 - For super user: [uav.kulabuz.com/admin](http://uav.kulabuz.com/admin)
 
-| Kullanıcı          | Şifre      | Takım        |
-|-------------------|------------|---------------|
-| halilsenaydin     | 270913     | root          |
-| kanat_user_one    | 741963qwe  | Kanat Takımı  |
-| kanat_user_two    | 741963qwe  | Kanat Takımı  |
-| govde_user_one    | 741963qwe  | Gövde Takımı  |
-| montaj_user_one   | 741963qwe  | Montaj Takımı |
+| Username        | Password  | Team          |
+| --------------- | --------- | ------------- |
+| halilsenaydin   | 270913    | root          |
+| kanat_user_one  | 741963qwe | Kanat Takımı  |
+| kanat_user_two  | 741963qwe | Kanat Takımı  |
+| govde_user_one  | 741963qwe | Gövde Takımı  |
+| montaj_user_one | 741963qwe | Montaj Takımı |
 
 ## Technologies Used
 
 - **Backend:**
+
   - Django
   - PostgreSQL
   - Django REST Framework
   - JWT (JSON Web Token) for authentication
 
 - **Frontend:**
+
   - Angular
 
 - **Others:**
@@ -60,11 +63,13 @@ Ensure you have the following software installed on your machine:
 ### Install Project Dependencies
 
 #### Install NVM
+
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 ```
 
 Close and reopen your terminal to start using nvm or run the following to use it now:
+
 ```bash
 exportNVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -72,17 +77,20 @@ exportNVM_DIR="$HOME/.nvm"
 ```
 
 #### Install Npm
+
 ```bash
 nvm install node
 nvm install --lts
 ```
 
 #### Install Angular CLI
+
 ```bash
 npm install -g @angular/cli
 ```
 
 #### Check Version
+
 ```bash
 npm -v
 ng --version
@@ -132,12 +140,15 @@ Access the Swagger-generated API documentation by visiting `http://localhost:800
 ## App Images
 
 ### Auth Images
+
 ![Home](app-images/sign-in/1.%20Login.png)
 
 ### 404 Not Found Images
+
 ![Home](app-images/404-not-found.png)
 
 ### Assembly User Images
+
 ![Home](app-images/montaj_user/1.%20Home.png)
 ![Produced Pieces](app-images/montaj_user/2.%20Produced-pieces.png)
 ![Produced Pieces Permission 1](app-images/montaj_user/3.%20Produced-pieces%20Permission-1.png)
@@ -151,6 +162,7 @@ Access the Swagger-generated API documentation by visiting `http://localhost:800
 ![Produce IHA Add New Piece](app-images/montaj_user/11.%20Produce%20iha%20add%20new%20ppiece.png)
 
 ### Wind User Images
+
 ![Home](app-images/kanat_user/1.%20Home.png)
 ![Stocks](app-images/kanat_user/2.%20Stocks.png)
 ![Permission 1](app-images/kanat_user/3.%20Permission-1.png)
@@ -160,3 +172,11 @@ Access the Swagger-generated API documentation by visiting `http://localhost:800
 ![Produce Piece Success](app-images/kanat_user/7.%20Produce-piece-success.png)
 ![Produce Piece Permission 1](app-images/kanat_user/8.%20Produce-piece%20Permission-1.png)
 ![Produce IHA](app-images/kanat_user/9.%20Produce-iha.png)
+
+### Quiz Images
+
+![Create Quiz](app-images/quiz/1-CreateQuiz.png)
+![Create Option](app-images/quiz/2-CreateOption.png)
+![List Quizzes](app-images/quiz/3-ListQuizzes.png)
+![Solve Quiz](app-images/quiz/4-SolveQuiz.png)
+![Review Quiz](app-images/quiz/5-ReviewQuiz.png)
