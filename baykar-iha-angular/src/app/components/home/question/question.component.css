@@ -1,0 +1,8 @@
+.container-fluid {
+    min-height: 90vh;
+}
+
+.disabled-card {
+    pointer-events: none;
+    opacity: 0.6;
+}

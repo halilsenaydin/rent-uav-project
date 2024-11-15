@@ -1,0 +1,89 @@
+<div class="container-fluid mt-5 mb-5 d-flex flex-column">
+    <div class="row h-100 justify-content-center flex-grow-1">
+        <div class="col-md-8">
+            <div class="container mt-4">
+                <h2 class="text-dark">Kısa Sınav</h2>
+                <p class="text-muted">
+                    Sistem tarafından sana atanan kısa sınav.
+                </p>
+            </div>
+
+            <div *ngIf="quiz; else loading">
+                <form [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
+                    <div *ngFor="let question of quiz.questions; let i = index" class="card mb-4 shadow-lg rounded-lg">
+                        <div class="card-header bg-dark text-white">
+                            <strong>Soru {{ i + 1 }}:</strong> {{ question.text }}
+                        </div>
+                        <div class="card-body">
+                            <!-- Question Image -->
+                            <div *ngIf="question.image" class="mb-4">
+                                <img [src]="apiRoot + '/' + question.image" alt="Question image"
+                                    class="img-fluid rounded-lg shadow-sm" />
+                            </div>
+
+                            <!-- Multiple Choice or True-False -->
+                            <div *ngIf="question.type === 'multiple_choice' || question.type === 'true_false'"
+                                class="mb-4">
+                                <div *ngFor="let option of question.options" class="form-check mb-3">
+                                    <input type="radio" class="form-check-input" [attr.name]="'question' + i"
+                                        [value]="option" [formControlName]="'question' + i" [ngClass]="{
+                                            'bg-success': readonly && (isAnswerCorrect(question, option) || isCorrectAnswer(question, option)),
+                                            'bg-danger': readonly && isAnswerIncorrect(question, option)
+                                        }" />
+                                    <label class="form-check-label d-flex align-items-center">
+                                        <div *ngIf="option.image" class="me-3">
+                                            <img [src]="apiRoot + '/' + option.image" class="img-fluid image"
+                                                alt="Option image" />
+                                        </div>
+                                        <span>{{ option.text }}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Classic or Fill in the Blank -->
+                            <div *ngIf="question.type === 'classic' || question.type === 'fill_in_the_blank'"
+                                class="mb-4">
+                                <textarea *ngIf="question.type === 'classic'" [formControlName]="'question' + i"
+                                    placeholder="Klasik sorunun cevabını yazın" class="form-control custom-textarea"
+                                    rows="4">
+                                </textarea>
+                                <input *ngIf="question.type === 'fill_in_the_blank'" type="text"
+                                    [formControlName]="'question' + i" class="form-control custom-input"
+                                    placeholder="Boşluğa en uygun cevabı yazın" />
+
+                                <div *ngIf="readonly">
+                                    <div class="mt-2">
+                                        <strong>Doğru Cevap:</strong>
+                                    </div>
+
+                                    <div *ngFor="let option of question.options" class="form-check">
+                                        <div class="mb-2">- {{ option.text }}</div>
+                                        <div *ngIf="option.image" class="me-3">
+                                            <img [src]="apiRoot + '/' + option.image" alt="Option image"
+                                                class="img-fluid image" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-end">
+                            <button [disabled]="quizForm.invalid" type="submit" class="btn btn-success ms-2">
+                                Cevapları Kaydet <i class="bi bi-check-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ng-template #loading>
+                <div class="text-center">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="sr-only">Yükleniyor...</span>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
