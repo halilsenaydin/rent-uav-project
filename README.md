@@ -13,7 +13,7 @@ This project is an application for renting unmanned aerial vehicles (UAVs). The 
 
 ## Preview The Project
 
-[Preview Angular for Rent UAV Project](https://uav-angular.kulabuz.com/swagger)
+[Preview Angular for Rent UAV Project](https://uav-angular.kulabuz.com)
 
 [Preview Swagger Documentation for Rent UAV Project](https://uav.kulabuz.com/swagger)
 
